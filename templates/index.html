@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenizers | Illustration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: radial-gradient(#FFBF78, #FEFFD2);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h2, h3 {
+            color: #444;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #fdfdfd;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #output {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .output-section {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            font-size: 16px;
+        }
+        .output-section strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+    </style>
+    <script>
+        async function updateInput(text) {
+            const response = await fetch('/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text }),
+            });
+            const result = await response.json();
+            document.getElementById('token-ids-gpt2').innerText = result.gpt2.token_ids;
+            document.getElementById('tokens-gpt2').innerText = result.gpt2.tokens;
+            document.getElementById('token-ids-gpt3.5').innerText = result.gpt35.token_ids;
+            document.getElementById('tokens-gpt3.5').innerText = result.gpt35.tokens;
+            document.getElementById('token-ids-gpt4o').innerText = result.gpt4o.token_ids;
+            document.getElementById('tokens-gpt4o').innerText = result.gpt4o.tokens;
+        }
+
+        function onTextInput(event) {
+            updateInput(event.target.value);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Tokenizer Illustration</h2>
+        <h3>Input Text</h3>
+        <textarea id="input" rows="10" cols="50" oninput="onTextInput(event)"></textarea>
+        <div id="output">
+            <div class="output-section">
+                <h3>GPT-2 (gpt2)</h3>
+                <div><strong>Tokens:</strong> <span id="tokens-gpt2"></span></div>
+                <div><strong>Token IDs:</strong> <span id="token-ids-gpt2"></span></div>
+            </div>
+            <div class="output-section">
+                <h3>GPT-3.5/GPT-4 (cl100k_base)</h3>
+                <div><strong>Tokens:</strong> <span id="tokens-gpt3.5"></span></div>
+                <div><strong>Token IDs:</strong> <span id="token-ids-gpt3.5"></span></div>
+            </div>
+            <div class="output-section">
+                <h3>GPT-4o (o200k_base)</h3>
+                <div><strong>Tokens:</strong> <span id="tokens-gpt4o"></span></div>
+                <div><strong>Token IDs:</strong> <span id="token-ids-gpt4o"></span></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
