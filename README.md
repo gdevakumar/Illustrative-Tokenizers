@@ -8,6 +8,8 @@ Large Language Models introduced by OpenAI (called GPT models) use a process cal
 
 The dashboard provides an interactive way to show how words are tokenized with each tokenizer in real-time as a side-by-side comparison. 
 
+Live -> On [render](https://illustrative-tokenizers.onrender.com/)
+
 ## Steps to run this localy (via command line)
 1. Clone this repository
 ```
@@ -48,8 +50,10 @@ docker run -p 5000:5000 tokenizers
 
 ### Screenshot
 
-[Image](./assets/Demo.png)
+![Image](./assets/Demo.png)
+
 --- 
+
 ### Video
 <div>
     <a href="https://www.loom.com/share/830bf02d6d77420c8aa0de431b092261">
