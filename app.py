@@ -9,7 +9,7 @@ def get_tokenizer(model):
 def process_text(text, tokenizer):
     ids = tokenizer.encode(text)
     tokens = [tokenizer.decode([id_]) for id_ in ids]
-    return {'token_ids': ids, 'tokens': tokens}
+    return {'token_ids': ids, 'tokens': tokens, 'token_count': len(tokens)}
 
 @app.route('/')
 def index():
@@ -32,16 +32,19 @@ def process_input():
 
     return jsonify({
         'gpt2': {
-            'token_ids': f'{results["gpt2"]["token_ids"]}', 
-            'tokens': f'{results["gpt2"]["tokens"]}'
+            'token_ids': results["gpt2"]["token_ids"], 
+            'tokens': results["gpt2"]["tokens"],
+            'token_count': results["gpt2"]["token_count"]
         },
         'gpt35': {
-            'token_ids': f'{results["gpt35"]["token_ids"]}', 
-            'tokens': f'{results["gpt35"]["tokens"]}'
+            'token_ids': results["gpt35"]["token_ids"], 
+            'tokens': results["gpt35"]["tokens"],
+            'token_count': results["gpt35"]["token_count"]
         },
         'gpt4o': {
-            'token_ids': f'{results["gpt4o"]["token_ids"]}', 
-            'tokens': f'{results["gpt4o"]["tokens"]}'
+            'token_ids': results["gpt4o"]["token_ids"], 
+            'tokens': results["gpt4o"]["tokens"],
+            'token_count': results["gpt4o"]["token_count"]
         }
     })
 

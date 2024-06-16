@@ -46,3 +46,16 @@ docker run -p 5000:5000 tokenizers
 
 ## Demo
 
+### Screenshot
+
+[Image](./assets/Demo.png)
+--- 
+### Video
+<div>
+    <a href="https://www.loom.com/share/830bf02d6d77420c8aa0de431b092261">
+      <p>Demo Video</p>
+    </a>
+    <a href="https://www.loom.com/share/830bf02d6d77420c8aa0de431b092261">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/830bf02d6d77420c8aa0de431b092261-with-play.gif">
+    </a>
+  </div>

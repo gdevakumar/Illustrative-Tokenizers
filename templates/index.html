@@ -45,9 +45,11 @@
             display: flex;
             justify-content: space-between;
             gap: 20px;
+            flex-wrap: wrap;
         }
         .output-section {
             flex: 1;
+            min-width: 300px;
             padding: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -56,6 +58,8 @@
             word-wrap: break-word;
             white-space: pre-wrap;
             font-size: 16px;
+            max-height: 400px;
+            overflow-y: auto;
         }
         .output-section strong {
             display: block;
@@ -74,12 +78,15 @@
                 body: JSON.stringify({ text }),
             });
             const result = await response.json();
-            document.getElementById('token-ids-gpt2').innerText = result.gpt2.token_ids;
-            document.getElementById('tokens-gpt2').innerText = result.gpt2.tokens;
-            document.getElementById('token-ids-gpt3.5').innerText = result.gpt35.token_ids;
-            document.getElementById('tokens-gpt3.5').innerText = result.gpt35.tokens;
-            document.getElementById('token-ids-gpt4o').innerText = result.gpt4o.token_ids;
-            document.getElementById('tokens-gpt4o').innerText = result.gpt4o.tokens;
+            document.getElementById('token-count-gpt2').innerText = result.gpt2.token_count;
+            document.getElementById('token-ids-gpt2').innerText = result.gpt2.token_ids.join(', ');
+            document.getElementById('tokens-gpt2').innerText = result.gpt2.tokens.join(', ');
+            document.getElementById('token-count-gpt3.5').innerText = result.gpt35.token_count;
+            document.getElementById('token-ids-gpt3.5').innerText = result.gpt35.token_ids.join(', ');
+            document.getElementById('tokens-gpt3.5').innerText = result.gpt35.tokens.join(', ');
+            document.getElementById('token-count-gpt4o').innerText = result.gpt4o.token_count;
+            document.getElementById('token-ids-gpt4o').innerText = result.gpt4o.token_ids.join(', ');
+            document.getElementById('tokens-gpt4o').innerText = result.gpt4o.tokens.join(', ');
         }
 
         function onTextInput(event) {
@@ -94,17 +101,20 @@
         <textarea id="input" rows="10" cols="50" oninput="onTextInput(event)"></textarea>
         <div id="output">
             <div class="output-section">
-                <h3>GPT-2 (gpt2)</h3>
+                <strong>GPT-2 (gpt2)</strong>
+                <div><strong>Number of Tokens:</strong> <span id="token-count-gpt2"></span></div>
                 <div><strong>Tokens:</strong> <span id="tokens-gpt2"></span></div>
                 <div><strong>Token IDs:</strong> <span id="token-ids-gpt2"></span></div>
             </div>
             <div class="output-section">
-                <h3>GPT-3.5/GPT-4 (cl100k_base)</h3>
+                <strong>GPT-3.5/GPT-4 (cl100k_base)</strong>
+                <div><strong>Number of Tokens:</strong> <span id="token-count-gpt3.5"></span></div>
                 <div><strong>Tokens:</strong> <span id="tokens-gpt3.5"></span></div>
                 <div><strong>Token IDs:</strong> <span id="token-ids-gpt3.5"></span></div>
             </div>
             <div class="output-section">
-                <h3>GPT-4o (o200k_base)</h3>
+                <strong>GPT-4o (o200k_base)</strong>
+                <div><strong>Number of Tokens:</strong> <span id="token-count-gpt4o"></span></div>
                 <div><strong>Tokens:</strong> <span id="tokens-gpt4o"></span></div>
                 <div><strong>Token IDs:</strong> <span id="token-ids-gpt4o"></span></div>
             </div>
